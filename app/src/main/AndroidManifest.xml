@@ -22,7 +22,10 @@
             android:label="Topic Selection"/>
         <activity
             android:name=".questionActivity"
-            android:label="Question"/>
+            android:label="Question"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
+
         <activity
             android:name=".resultActivity"
             android:label="Results"/>

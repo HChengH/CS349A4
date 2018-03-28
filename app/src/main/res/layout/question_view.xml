@@ -34,29 +34,26 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="27dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="44dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="70dp"
         android:text="This is the Question This is the Question This is the Question!"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="156dp"
-        android:layout_height="263dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="55dp"
+        android:layout_height="156dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="20dp"
         android:adjustViewBounds="false"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question"
         app:srcCompat="@mipmap/ic_launcher" />
 
 
@@ -66,13 +63,13 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="114dp"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="15dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <RadioButton
             android:id="@+id/single1"
@@ -114,13 +111,12 @@
         android:id="@+id/MultiGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="145dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <CheckBox
             android:id="@+id/multi1"

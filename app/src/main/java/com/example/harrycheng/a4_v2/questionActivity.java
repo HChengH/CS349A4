@@ -1,7 +1,7 @@
 package com.example.harrycheng.a4_v2;
 
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
+import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.Observable;
 import java.util.Observer;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 
 public class questionActivity extends AppCompatActivity implements Observer{
@@ -41,20 +42,31 @@ public class questionActivity extends AppCompatActivity implements Observer{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.question_view);
 
         this.m = userModel.getInstance();
         m.addObserver(this);
 
-        TextView w = findViewById(R.id.userName);
-        String name = "Name: "+m.getName();
-        if(w != null) w.setText(name);
-
-        w = findViewById(R.id.questCount);
-        if(w != null) w.setText(currentQuestion+"/"+m.getNumOfQuestion());
-
         loadAllAttributes();
         loadCurrentQuestion();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        storeCurrentQuestion(currentQuestion-1);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.question_view_landscape);
+            loadAllAttributes();
+            loadCurrentQuestion();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.question_view);
+            loadAllAttributes();
+            loadCurrentQuestion();
+        }
     }
 
     public void logOutClick2(View v){
@@ -76,11 +88,24 @@ public class questionActivity extends AppCompatActivity implements Observer{
         allAnswers = getResources().obtainTypedArray(R.array.allAnswers);
         correctAns = getResources().obtainTypedArray(R.array.correctAnswers);
 
+        TextView w = findViewById(R.id.userName);
+        String name = "Name: "+m.getName();
+        if(w != null) w.setText(name);
+
+        w = findViewById(R.id.questCount);
+        if(w != null) w.setText(currentQuestion+"/"+m.getNumOfQuestion());
+
         if(currentQuestion == m.getNumOfQuestion()){
             ((Button)findViewById(R.id.nextQ)).setText("Finish");
         }
 
-        this.prev.setEnabled(false);
+        if(currentQuestion == 1) {
+            this.prev.setEnabled(false);
+        }
+
+        if(currentQuestion == m.getNumOfQuestion()) {
+            this.next.setText("Finish");
+        }
     }
 
     public void loadCurrentQuestion(){
@@ -150,8 +175,6 @@ public class questionActivity extends AppCompatActivity implements Observer{
 
         id = getResources().getIdentifier("image"+currentQuestion, "drawable", getPackageName());
         this.image.setImageResource(id);
-        //this.image.setScaleType(ImageView.ScaleType.MATRIX);
-
         this.numOfQuest.setText(currentQuestion+"/"+m.getNumOfQuestion());
     }
 
@@ -191,6 +214,7 @@ public class questionActivity extends AppCompatActivity implements Observer{
     }
 
     public void prevQuest(View v){
+        storeCurrentQuestion(this.currentQuestion-1);
         this.currentQuestion--;
         if(this.currentQuestion == 1){
             this.prev.setEnabled(false);
@@ -199,7 +223,6 @@ public class questionActivity extends AppCompatActivity implements Observer{
         if(this.currentQuestion < m.getNumOfQuestion()){
             this.next.setText("NEXT");
         }
-        storeCurrentQuestion(this.currentQuestion);
         loadCurrentQuestion();
     }
 
