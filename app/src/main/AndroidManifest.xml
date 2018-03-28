@@ -16,6 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".topicChooseActivity"
+            android:label="Topic Selection"/>
+        <activity
+            android:name=".questionActivity"
+            android:label="Question"/>
+        <activity
+            android:name=".resultActivity"
+            android:label="Results"/>
+
     </application>
 
 </manifest>
